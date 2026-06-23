@@ -1,23 +1,27 @@
-#include <iostream>
-#include <unordered_map>
-using namespace std;
+#include <stdio.h>
 
 int main() {
-    string str;
-    cin >> str;
+    char str[100];
+    int freq[256] = {0};
+    int i;
 
-    unordered_map<char, int> freq;
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
 
-    for (char ch : str)
-        freq[ch]++;
+    // Count frequency of each character
+    for(i = 0; str[i] != '\0'; i++) {
+        freq[(unsigned char)str[i]]++;
+    }
 
-    for (char ch : str) {
-        if (freq[ch] == 1) {
-            cout << "First Non-Repeating Character: " << ch;
+    // Find first non-repeating character
+    for(i = 0; str[i] != '\0'; i++) {
+        if(freq[(unsigned char)str[i]] == 1) {
+            printf("First non-repeating character: %c\n", str[i]);
             return 0;
         }
     }
 
-    cout << "No non-repeating character found";
+    printf("No non-repeating character found.\n");
+
     return 0;
 }
